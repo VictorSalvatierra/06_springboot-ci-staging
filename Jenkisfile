@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Webhook Triggered') {
             steps {
-                echo 'Build ejecutado por webhook desde GitHub'
+                echo 'Build ejecutado por webhook desde GitHub 1.0'
             }
         }
     }
