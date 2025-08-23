@@ -6,16 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
+@RestController
 public class DemoApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
-}
 
-@RestController
-class HelloController {
-    @GetMapping("/")
-    public String hello() {
-        return "Hello CI/CD World!";
+    @GetMapping("/health")
+    public String healthCheck() {
+        return "OK";
     }
 }

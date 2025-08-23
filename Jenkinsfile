@@ -1,35 +1,46 @@
 pipeline {
-  agent any
-  environment {
-    IMAGE_NAME = "demo-ci-cd:latest"
-  }
-  stages {
-    stage('Checkout') {
-      steps {
-        checkout scm
-      }
+    agent any
+    environment {
+        STAGING_SERVER = 'user@ssh_server'
+        ARTIFACT_NAME = 'demo-0.0.1-SNAPSHOT.jar'
     }
-    stage('Build & Test') {
-      steps {
-        sh 'mvn -B clean package'
-      }
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/nicolasth21/springboot-app'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
+        stage('Code Quality') {
+            steps {
+                sh 'mvn checkstyle:check'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+        stage('Code Coverage') {
+            steps {
+                sh 'mvn jacoco:report'
+            }
+        }
+        stage('Deploy to Staging') {
+            steps {
+                sh 'scp target/${ARTIFACT_NAME} $STAGING_SERVER:/var/local/staging/'
+                sh 'ssh $STAGING_SERVER "nohup java -jar /var/local/staging/${ARTIFACT_NAME} > /dev/null 2>&1 &"'
+            }
+        }
+        stage('Validate Deployment') {
+            steps {
+                sh 'sleep 10'
+                sh 'curl --fail http://your-staging-server:8181/health'
+            }
+        }
     }
-    stage('Build Docker Image') {
-      steps {
-        sh 'docker build -t $IMAGE_NAME .'
-      }
-    }
-    stage('Run Container') {
-      steps {
-        sh 'docker rm -f demo-ci-cd || true'
-        sh 'docker run -d --name demo-ci-cd -p 8081:8080 $IMAGE_NAME'
-      }
-    }
-  }
-  post {
-    always {
-      junit '**/target/surefire-reports/*.xml'
-      archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-    }
-  }
 }
