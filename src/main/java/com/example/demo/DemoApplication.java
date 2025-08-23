@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * <p>
  * Annotations:
  * <ul>
- *   <li>{@link SpringBootApplication} 
+ *   <li>{@link SpringBootApplication}
  * - Indicates a Spring Boot application.</li>
  *   <li>{@link RestController} - Marks this class as a REST controller.</li>
  * </ul>
