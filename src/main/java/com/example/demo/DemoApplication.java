@@ -36,7 +36,7 @@ public class DemoApplication {
     }
 
     @GetMapping("/health")
-    static public String healthCheck() {
+    public static  String healthCheck() {
         return "OK";
     }
 }
