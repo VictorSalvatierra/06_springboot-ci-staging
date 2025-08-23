@@ -1,4 +1,4 @@
 /**
  * Paquete x.
  */
-package pkg.x;
+package pkg;
