@@ -8,35 +8,45 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Main Spring Boot application class.
  * <p>
- * This class serves as the entry point for the Spring Boot
+ * This class serves as the entry point for the Spring Boot application and exposes
  * a simple health check endpoint at <code>/health</code>.
  * </p>
- * 
+ *
  * <p>
  * Annotations:
  * <ul>
- *   <li>{@link org.springframework.boot.autoconfigure.SpringBootApplication}
- *   <li>{@link org.springframework.web.bind.annotation.RestController}
+ *   <li>{@link org.springframework.boot.autoconfigure.SpringBootApplication} - Indicates a Spring Boot application.</li>
+ *   <li>{@link org.springframework.web.bind.annotation.RestController} - Marks this class as a REST controller.</li>
  * </ul>
  * </p>
- * 
+ *
  * @author Pablo Villazon
  */
 @SpringBootApplication
 @RestController
 public class DemoApplication {
 
+    // Private constructor to prevent instantiation
+    private DemoApplication() {
+        throw new UnsupportedOperationException("Utility class");
+    }
+
     /**
-     * The main entry point of the Spring Boot application.
+     * Health check endpoint.
+     *
+     * @return "OK" if the application is running
+     */
+    @GetMapping("/health")
+    public static String healthCheck() {
+        return "OK";
+    }
+
+    /**
+     * Main method to start the Spring Boot application.
      *
      * @param args command-line arguments
      */
     public static void main(final String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-    }
-
-    @GetMapping("/health")
-    public static  String healthCheck() {
-        return "OK";
     }
 }
