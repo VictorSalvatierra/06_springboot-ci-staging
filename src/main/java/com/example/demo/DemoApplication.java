@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @SpringBootApplication
 @RestController
-public class DemoApplication {
+public final class DemoApplication {
 
     // Private constructor to prevent instantiation
     private DemoApplication() {
@@ -51,8 +51,5 @@ public class DemoApplication {
      */
     public static void main(final String[] args) {
         SpringApplication.run(DemoApplication.class, args);
-    }
-    public final class DemoApplication {
-    // contenido de la clase
     }
 }
