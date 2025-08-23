@@ -52,4 +52,7 @@ public class DemoApplication {
     public static void main(final String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
+    public final class DemoApplication {
+    // contenido de la clase
+    }
 }
