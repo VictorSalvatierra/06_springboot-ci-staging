@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        STAGING_SERVER = 'root@ssh_server'
+        STAGING_SERVER = 'root@ssh_server2'
         ARTIFACT_NAME = 'demo-0.0.1-SNAPSHOT.jar'
     }
     stages {
@@ -39,7 +39,7 @@ pipeline {
         stage('Validate Deployment') {
             steps {
                 sh 'sleep 10'
-                sh 'curl --fail http://your-staging-server:8181/health'
+                sh 'curl --fail http://STAGING_SERVER:8181/health'
             }
         }
     }
