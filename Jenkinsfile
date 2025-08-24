@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        STAGING_SERVER = 'user@ssh_server'
+        STAGING_SERVER = 'root@ssh_server'
         ARTIFACT_NAME = 'demo-0.0.1-SNAPSHOT.jar'
     }
     stages {
