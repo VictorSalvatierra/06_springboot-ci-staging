@@ -34,6 +34,7 @@ public class DemoApplication {
      */
     @GetMapping("/health")
     public String healthCheck() {
+        System.out.println("✅ /health endpoint called");
         return "OK";
     }
 
