@@ -38,7 +38,7 @@ pipeline {
         }
         stage('Validate Deployment') {
             steps {
-                sh 'sleep 10'
+                sh 'sleep 20'
                 sh 'curl --fail http://STAGING_SERVER:8181/health'
             }
         }
