@@ -84,7 +84,7 @@ pipeline {
                     for (int i = 0; i < retries; i++) {
                         def result = sh(script: "ssh $STAGING_SERVER 'curl --fail --silent http://localhost:8181/health'", returnStatus: true)
                         if (result == 0) {
-                            echo "✅ Servicio disponible en localhost:8181/health desde ssh_server2"
+                            echo "✅ Servicio disponible en localhost:8181/health desde ssh_server"
                             success = true
                             break
                         } else {
@@ -94,7 +94,7 @@ pipeline {
                     }
         
                     if (!success) {
-                        error "❌ El servicio no respondió en localhost:8181/health desde ssh_server2"
+                        error "❌ El servicio no respondió en localhost:8181/health desde ssh_server"
                     }
                 }
             }
