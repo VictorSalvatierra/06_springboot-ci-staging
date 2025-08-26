@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git branch: 'main', url: 'https://github.com/nicolasth21/springboot-app'
+                git branch: 'main', url: 'https://github.com/VictorSalvatierra/06_springboot-ci-staging'
             }
         }
 
